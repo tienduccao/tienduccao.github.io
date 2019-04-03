@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Duc Cao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Mar 2012 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tienduccao.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Spacy pretrain command</title>
       <link>https://tienduccao.github.io/posts/spacy_pretrain/</link>
-      <pubDate>Sun, 04 Mar 2012 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tienduccao.github.io/posts/spacy_pretrain/</guid>
       <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/ and uses a CNN model to predict each word&amp;rsquo;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
