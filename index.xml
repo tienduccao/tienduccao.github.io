@@ -17,7 +17,7 @@
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tienduccao.github.io/posts/spacy_pretrain/</guid>
-      <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/ and uses a CNN model to predict each word&amp;rsquo;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
+      <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/) and uses a CNN model to predict each word&amp;rsquo;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
 According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task. He used pretraining&amp;rsquo;s output to train a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.</description>
     </item>
     
