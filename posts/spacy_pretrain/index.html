@@ -56,8 +56,6 @@
   <p><a href="https://explosion.ai/blog/spacy-v2-1">Spacy 2.1</a> released an interesting command <em>spacy pretrain</em>.
 It loads a pre-trained vectors (<a href="https://spacy.io/models/">https://spacy.io/models/</a>
 and uses a CNN model to predict each word&rsquo;s pre-trained vector instead of the word itself.
-Then the output of this process (pre-trained weights) is saved in order to be used as input
-of <code>spacy train</code> command (argument <em>-t2v</em>).
 They termed this technique as <em>Language Modelling with Approximate Outputs</em> (LMAO).</p>
 
 <p>According to the creator of Spacy, this approach is especially useful when you have limited training data
@@ -97,10 +95,6 @@ Some pre-trained weights are stored
 Trying different parameters of <em>pretrain_textcat.py</em> should be done in order to achieve the optimal performance.
 We could also try different pre-trained vector file (word2vec, Glove, fastText) to see if it could
 lead to better performance.</p>
-
-<!--Using both pre-trained weights and word vectors, the classifier achieves even higher F1-score TODO.-->
-
-<!--The spacy pretrain command requires a word vectors model as part of the input, which it uses as the target output for each token. Instead of predicting a token's ID as a classification problem, we learn to predict the token's word vector. Inspired by names such as ELMo and BERT, we've termed this trick Language Modelling with Approximate Outputs (LMAO)-->
 
 </div>
 
