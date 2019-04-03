@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Duc Cao</title>
-    <link>https://tienduccao.github.io/</link>
-    <description>Recent content on Duc Cao</description>
+    <title>Posts on Duc Cao</title>
+    <link>https://tienduccao.github.io/posts/</link>
+    <description>Recent content in Posts on Duc Cao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Feb 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tienduccao.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tienduccao.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
