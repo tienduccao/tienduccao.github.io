@@ -52,9 +52,14 @@
     <main class="content container">
     <div class="post">
   <h1>Spacy pretrain command</h1>
-  <time datetime=2012-02-04T00:00:00Z class="post-date">Sat, Feb 4, 2012</time>
+  <time datetime=2012-03-04T00:00:00Z class="post-date">Sun, Mar 4, 2012</time>
   <p><a href="https://explosion.ai/blog/spacy-v2-1">Spacy 2.1</a> released an interesting command <em>spacy pretrain</em>.
-According to the creator of Spacy, this feature is especially useful when you have limited training data
+It loads a pre-trained vectors (<a href="https://spacy.io/models/">https://spacy.io/models/</a>
+and uses a CNN model to predict each word&rsquo;s pre-trained vector instead of the word itself.
+Then the output of this process (pre-trained weights) is saved in order to be used as input
+of <code>spacy train</code> command (argument <code>-t2v</code>).
+They termed this technique as <em>Language Modelling with Approximate Outputs</em> (LMAO).
+According to the creator of Spacy, this approach is especially useful when you have limited training data
 for text classification and parsing task.
 He used pretraining&rsquo;s output to training a text classifier on 1,000 samples and reported
 a high F1-score of <a href="https://github.com/honnibal/spacy-pretrain-polyaxon#text-classification-results">87%</a>
@@ -65,7 +70,9 @@ All the code and data are available at
 <a href="https://github.com/tienduccao/spacy-pretrain-polyaxon">https://github.com/tienduccao/spacy-pretrain-polyaxon</a>s,
 under <em>lmao-imdb-1k</em> folder.</p>
 
-<p>Firstly you need to convert your unlabled text into <a href="https://spacy.io/api/cli#pretrain-jsonl">.jsonl format</a>.
+<p>Firstly you need to convert your unlabled text into <a href="https://spacy.io/api/cli#pretrain-jsonl">.jsonl format</a> using
+<code>python generate_jsonl.py</code>.
+You also need to download the Spacy pre-trained vector file (<code>spacy download en_vectors_web_lg</code>).
 Then executing the command<code>spacy pretrain</code> to obtain the pre-trained weights.</p>
 
 <pre><code>spacy pretrain corpus.jsonl en_vectors_web_lg weights
@@ -76,16 +83,16 @@ This task took 24,5h for 832 iterations on GeForce GTX 1080.
 Some pre-trained weights are stored
 <a href="https://github.com/tienduccao/spacy-pretrain-polyaxon/tree/master/lmao-imdb-1k/weights">here</a>.</p>
 
-<p>Without using the pre-trained weights (<code>python pretrain_textcat.py 96 2000</code>), we obtain an F1-score of 73.4%.</p>
+<p>Without using the pre-trained weights (<code>python pretrain_textcat.py 96 2000</code>), I obtained an F1-score of 73.4%.</p>
 
 <p>The next step is training a text classifier using pre-trained weights.</p>
 
-<pre><code>python pretrain_textcat.py -t2v weights/model800.bin 96 200
+<pre><code>python pretrain_textcat.py -t2v weights/model800.bin 96 2000
 </code></pre>
 
 <p>Now the performance increases up to <strong>85.4%</strong>.</p>
 
-<p>Using both pre-trained weights and word vectors, the classifier achieves even higher F1-score TODO.</p>
+<!--Using both pre-trained weights and word vectors, the classifier achieves even higher F1-score TODO.-->
 
 <!--The spacy pretrain command requires a word vectors model as part of the input, which it uses as the target output for each token. Instead of predicting a token's ID as a classification problem, we learn to predict the token's word vector. Inspired by names such as ELMo and BERT, we've termed this trick Language Modelling with Approximate Outputs (LMAO)-->
 

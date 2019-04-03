@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Duc Cao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Feb 2012 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Mar 2012 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tienduccao.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,11 +14,10 @@
     <item>
       <title>Spacy pretrain command</title>
       <link>https://tienduccao.github.io/posts/a/</link>
-      <pubDate>Sat, 04 Feb 2012 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 04 Mar 2012 00:00:00 +0000</pubDate>
       
       <guid>https://tienduccao.github.io/posts/a/</guid>
-      <description>Spacy 2.1 released an interesting command spacy pretrain. According to the creator of Spacy, this feature is especially useful when you have limited training data for text classification and parsing task. He used pretraining&amp;rsquo;s output to training a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.
-In order to get familiar with this technique, I ran a similar experiment on a new dataset.</description>
+      <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/ and uses a CNN model to predict each word&amp;rsquo;s pre-trained vector instead of the word itself. Then the output of this process (pre-trained weights) is saved in order to be used as input of spacy train command (argument -t2v). They termed this technique as Language Modelling with Approximate Outputs (LMAO). According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task.</description>
     </item>
     
   </channel>
