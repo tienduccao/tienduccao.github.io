@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <link href="//gmpg.org/xfn/11" rel="profile">
+  <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
+  <meta name="generator" content="Hugo 0.60.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Duc Cao</title>
+  <meta name="description" content="Welcome to my blog" />
 
   
   <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/print.css" media="print">
@@ -24,7 +25,6 @@
 
   
   <link href="https://tienduccao.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Duc Cao" />
-
   
 </head>
 
@@ -46,6 +46,10 @@
     </nav>
 
     <p>&copy; 2019. All rights reserved. </p>
+      <a href="https://www.linkedin.com/in/tien-duc-cao/"><img src="/images/linkedin.png" alt="" height="28" width="28"
+          style="float: left" ></a>
+      <a href="https://twitter.com/tienduccao"><img src="/images/twitter.png" alt="" height="28" width="28" style="float: left" /></a>
+      <a href="https://github.com/tienduccao"><img src="/images/github.png" alt="" height="28" width="28"/></a>
   </div>
 </aside>
 
@@ -57,7 +61,7 @@
   </h1>
   <time datetime="2019-05-31T17:00:02&#43;0200" class="post-date">Fri, May 31, 2019</time>
   The common approaches to encode categorical data are one-hot encoding and label encoding. Recently I encountered another method called &ldquo;target encoding&rdquo; which is more efficient. This technique is invented by Daniele Micci-Barreca (A preprocessing scheme for high-cardinality categorical attributes in classification and prediction problems).
-The idea is using the relationship between the categorical feature x and the target y in order to have a more meaningful numerical representation of x. If x has N unique values xi then this relationship is defined as a function of the count of xi (how many times that we observe x equals to xi) and the mean y corresponding to each xi.
+The idea is using the relationship between the categorical feature x and the target y in order to have a more meaningful numerical representation of x. If x has N unique values xithen this relationship is defined as a function of the count of xi(how many times that we observe x equals to xi) and the mean y corresponding to each xi.
   
   <div class="read-more-link">
     <a href="/posts/target_encoding/">Read More…</a>
@@ -68,8 +72,8 @@ The idea is using the relationship between the categorical feature x and the tar
     <a href="https://tienduccao.github.io/posts/spacy_pretrain/">Spacy pretrain command</a>
   </h1>
   <time datetime="2019-04-03T00:00:00Z" class="post-date">Wed, Apr 3, 2019</time>
-  Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/) and uses a CNN model to predict each word&rsquo;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
-According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task. He used pretraining&rsquo;s output to train a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.
+  Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/) and uses a CNN model to predict each word's pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
+According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task. He used pretraining's output to train a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.
   
   <div class="read-more-link">
     <a href="/posts/spacy_pretrain/">Read More…</a>
@@ -80,7 +84,7 @@ According to the creator of Spacy, this approach is especially useful when you h
     </main>
 
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -89,7 +93,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </body>
 </html>

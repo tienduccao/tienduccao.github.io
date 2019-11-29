@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Duc Cao</title>
@@ -18,7 +18,7 @@
       
       <guid>https://tienduccao.github.io/posts/target_encoding/</guid>
       <description>The common approaches to encode categorical data are one-hot encoding and label encoding. Recently I encountered another method called &amp;ldquo;target encoding&amp;rdquo; which is more efficient. This technique is invented by Daniele Micci-Barreca (A preprocessing scheme for high-cardinality categorical attributes in classification and prediction problems).
-The idea is using the relationship between the categorical feature x and the target y in order to have a more meaningful numerical representation of x. If x has N unique values xi then this relationship is defined as a function of the count of xi (how many times that we observe x equals to xi) and the mean y corresponding to each xi.</description>
+The idea is using the relationship between the categorical feature x and the target y in order to have a more meaningful numerical representation of x. If x has N unique values xithen this relationship is defined as a function of the count of xi(how many times that we observe x equals to xi) and the mean y corresponding to each xi.</description>
     </item>
     
     <item>
@@ -27,8 +27,8 @@ The idea is using the relationship between the categorical feature x and the tar
       <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tienduccao.github.io/posts/spacy_pretrain/</guid>
-      <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/) and uses a CNN model to predict each word&amp;rsquo;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
-According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task. He used pretraining&amp;rsquo;s output to train a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.</description>
+      <description>Spacy 2.1 released an interesting command spacy pretrain. It loads a pre-trained vectors (https://spacy.io/models/) and uses a CNN model to predict each word&#39;s pre-trained vector instead of the word itself. They termed this technique as Language Modelling with Approximate Outputs (LMAO).
+According to the creator of Spacy, this approach is especially useful when you have limited training data for text classification and parsing task. He used pretraining&#39;s output to train a text classifier on 1,000 samples and reported a high F1-score of 87% on the test set consisting of 5,000 samples.</description>
     </item>
     
   </channel>

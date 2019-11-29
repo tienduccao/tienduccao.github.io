@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <link href="//gmpg.org/xfn/11" rel="profile">
+  <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.41" />
+  <meta name="generator" content="Hugo 0.60.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Target encoding &middot; Duc Cao</title>
+  <meta name="description" content="" />
 
   
   <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/print.css" media="print">
@@ -23,8 +24,6 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="" rel="alternate" type="application/rss+xml" title="Duc Cao" />
-
   
 </head>
 
@@ -46,6 +45,10 @@
     </nav>
 
     <p>&copy; 2019. All rights reserved. </p>
+      <a href="https://www.linkedin.com/in/tien-duc-cao/"><img src="/images/linkedin.png" alt="" height="28" width="28"
+          style="float: left" ></a>
+      <a href="https://twitter.com/tienduccao"><img src="/images/twitter.png" alt="" height="28" width="28" style="float: left" /></a>
+      <a href="https://github.com/tienduccao"><img src="/images/github.png" alt="" height="28" width="28"/></a>
   </div>
 </aside>
 
@@ -56,29 +59,25 @@
   <p>The common approaches to encode categorical data are one-hot encoding and label encoding.
 Recently I encountered another method called &ldquo;target encoding&rdquo; which is more efficient.
 This technique is invented by Daniele Micci-Barreca (<a href="https://dl.acm.org/citation.cfm?doid=507533.507538">A preprocessing scheme for high-cardinality categorical attributes in classification and prediction problems</a>).</p>
-
 <p>The idea is using the relationship between the categorical feature <code>x</code> and the target
 <code>y</code> in order to have a more meaningful numerical representation of <code>x</code>.
-If <code>x</code> has <code>N</code> unique values x<sub>i</sub> then this relationship is defined as a function of the <strong>count</strong> of
-x<sub>i</sub> (how many times that we observe <code>x</code> equals to x<sub>i</sub>)
-and the <strong>mean</strong> <code>y</code> corresponding to each x<sub>i</sub>.</p>
-
+If <code>x</code> has <code>N</code> unique values x<!-- raw HTML omitted -->i<!-- raw HTML omitted --> then this relationship is defined as a function of the <strong>count</strong> of
+x<!-- raw HTML omitted -->i<!-- raw HTML omitted --> (how many times that we observe <code>x</code> equals to x<!-- raw HTML omitted -->i<!-- raw HTML omitted -->)
+and the <strong>mean</strong> <code>y</code> corresponding to each x<!-- raw HTML omitted -->i<!-- raw HTML omitted -->.</p>
 <p>I did an experiment with the Kaggle <a href="https://www.kaggle.com/jameslko/gun-violence-data">Gun Violence</a> dataset to figure
 out the effectiveness of target encoding method.
 The code of this experiment is available at
-<a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb">https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb</a>.</p>
-
+<a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb"><a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb">https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb</a></a>.</p>
 <p>The target <code>y</code> in this dataset is <code>n_killed</code> which is the number of people killed from a gun violence indicent.
 The categorical feature <code>x</code> is <code>state</code> where the indicent happened.
 If we apply the
 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">LabelEncoder</a> on <code>x</code>, the encoded values would look like this
-<img src="/images/label_encoder.png?raw=true" alt="" />
+<img src="/images/label_encoder.png?raw=true" alt="">
 The following figure shows the encoded values of <code>x</code> using
 <a href="http://contrib.scikit-learn.org/categorical-encoding/targetencoder.html">TargetEncoder</a>
-<img src="/images/target_encoder.png?raw=true" alt="" />
-It is clear that the TargetEncoder&rsquo;s encoded values reflect a trend of the target <code>n_killed</code>.</p>
-
-<p>To verify if TargetEncoder could help to improve model&rsquo;s predictive power,
+<img src="/images/target_encoder.png?raw=true" alt="">
+It is clear that the TargetEncoder's encoded values reflect a trend of the target <code>n_killed</code>.</p>
+<p>To verify if TargetEncoder could help to improve model's predictive power,
 I ran a RandomForestClassifier (5-folds stratified k-fold) on a set of categorical features
 (&ldquo;state&rdquo;,
 &ldquo;city_or_county&rdquo;,
@@ -90,19 +89,17 @@ I ran a RandomForestClassifier (5-folds stratified k-fold) on a set of categoric
 &ldquo;participant_status&rdquo;,
 &ldquo;participant_type&rdquo;)
 using</p>
-
 <ul>
 <li>(1) only LabelEncoder</li>
 <li>(2) TargetEncoder on features with high-cardinality (above 2K unique values) and LabelEncoder with the remaining features</li>
 </ul>
-
 <p>The first approach achieves an average log-loss score of 0.02103 while the second one gets <strong>0.01292</strong>.</p>
 
 </div>
 
 <h2>Comments</h2>
 <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -124,7 +121,7 @@ using</p>
     </main>
 
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -133,7 +130,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </body>
 </html>
