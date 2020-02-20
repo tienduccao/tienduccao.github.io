@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.60.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kubernetes rolling updates &middot; Duc Cao</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://tienduccao.github.io/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class="theme-base-0c ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://tienduccao.github.io/"><h1>Duc Cao</h1></a>
+      <p class="lead">
+       Welcome to my blog 
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="https://tienduccao.github.io/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+      <a href="https://www.linkedin.com/in/tien-duc-cao/"><img src="/images/linkedin.png" alt="" height="28" width="28"
+          style="float: left" ></a>
+      <a href="https://twitter.com/tienduccao"><img src="/images/twitter.png" alt="" height="28" width="28" style="float: left" /></a>
+      <a href="https://github.com/tienduccao"><img src="/images/github.png" alt="" height="28" width="28"/></a>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Kubernetes rolling updates</h1>
+  <time datetime=2020-02-20T00:00:00Z class="post-date">Thu, Feb 20, 2020</time>
+  <p><strong>Note</strong>: this tutorial is done with Kubernetes v1.17.2, Docker 19.03.5
+on MacOS 0.15.2.</p>
+<h1 id="kubernetes">Kubernetes</h1>
+<p>Kubernetes cluster</p>
+<ul>
+<li>A <strong>node</strong> is a virtual machine or a physical computer that serves as a worker machine in a Kubernetes cluster.</li>
+<li>The <strong>Master</strong> is responsible for managing the cluster. The master coordinates all activities in your cluster, such as scheduling applications, maintaining applications&rsquo; desired state, scaling applications, and rolling out new updates.
+<img src="https://d33wubrfki0l68.cloudfront.net/99d9808dcbf2880a996ed50d308a186b5900cec9/40b94/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg" alt=""></li>
+</ul>
+<p>Kubernetes core concepts</p>
+<ul>
+<li>A <strong>Pod</strong> is a Kubernetes abstraction that represents a group of one or more application containers (such as Docker or rkt), and some shared resources for those containers.
+A Pod models an application-specific &ldquo;logical host&rdquo; and can contain different application containers which are relatively tightly coupled.</li>
+<li>A <strong>Service</strong> is an abstraction which defines a logical set of Pods and a policy by which to access them.
+A Service routes traffic across a set of Pods. Services are the abstraction that allow pods to die and replicate in Kubernetes without impacting your application.</li>
+<li>A <strong>Deployment</strong> instructs Kubernetes to deploy containerized applications to
+a Kubernetes cluster.</li>
+<li><strong>Self-healing</strong> mechanism: Kubernetes takes care of replacing the down cluster with a new one.</li>
+<li><strong>Rolling updates</strong>: Kubernetes deploys the updated app to a new available pod then swap it with the current version of the app
+<img src="https://trello-attachments.s3.amazonaws.com/5e4d3b9ece8a0409d592ef58/1174x1026/95bd3594ff08ab1cd3e1be3753ce868b/image.png" alt=""></li>
+</ul>
+<h1 id="a-very-simple-server">A very simple server</h1>
+<p>For demonstration purpose,
+we write a server which listens at the port 8080 and responses
+a string &ldquo;Hello World!&rdquo; to every request from clients.
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// server.js
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">handleRequest</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received request for URL: &#39;</span> <span class="o">+</span> <span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span><span class="p">;</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="p">;</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">www</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">handleRequest</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">www</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Then we write a Dockerfile for our containerized application</p>
+<pre><code>FROM node:6.14.2
+EXPOSE 8080
+COPY server.js .
+CMD [ &quot;node&quot;, &quot;server.js&quot; ]
+</code></pre><h1 id="requirements">Requirements</h1>
+<p>We install <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">minikube</a>
+and <a href="https://docs.docker.com/install/">Docker</a> in order to manage Kubernetes clusters.
+A Kubernetes cluster could be started with the following command <code>minikube start</code>.
+To ensure that our cluster is operating normally, we should see the following
+output from <code>minikube status</code> command.</p>
+<pre><code>host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+</code></pre><h1 id="deploy-our-app">Deploy our app</h1>
+<p>The <a href="https://kubernetes.io/docs/concepts/containers/images/">recommended workflow</a>
+is uploading a Docker image to a <a href="https://docs.docker.com/registry/">registry</a>,
+creating a Kubernetes pod,
+and granting the pod the access to the image.
+In order to simply the setup of this tutorial,
+we could apply <a href="https://github.com/kubernetes/minikube/blob/0c616a6b42b28a1aab8397f5a9061f8ebbd9f3d9/README.md#reusing-the-docker-daemon">this
+solution</a>
+to let the pod have direct access to the Docker images stored inside a
+Kubernetes node.</p>
+<pre><code>eval $(minikube docker-env)
+</code></pre><p>To deploy our app, we firstly need to build a Docker image</p>
+<pre><code>docker build -t myimage:v1 .
+</code></pre><p>We create a <em>Kubernetes Deployment</em> by executing
+<code>kubectl create deployment myapp --image=myimage:v1</code></p>
+<p>By default, the containerized application only exposes itself to other apps
+in the same cluster.
+We create a <em>Kubernetes Service</em> to expose our web app so external
+users could interact with it.</p>
+<pre><code>kubectl expose deployments/myservice --type=&quot;NodePort&quot; --port 8080 --name myservice
+</code></pre><p>The following scripts help us to verify whether our app is functioning
+normally.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">NODE_PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get services/myservice -o <span class="se">\
+</span><span class="se"></span>    go-template<span class="o">=</span><span class="s1">&#39;{{(index .spec.ports 0).nodePort}}&#39;</span><span class="k">)</span>
+<span class="nb">export</span> <span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl get pods -o <span class="se">\
+</span><span class="se"></span>    go-template --template <span class="s1">&#39;{{range .items}}{{.metadata.name}}{{&#34;\n&#34;}}{{end}}&#39;</span><span class="k">)</span>
+<span class="c1"># Make a request to the web app</span>
+curl <span class="k">$(</span>minikube ip<span class="k">)</span>:<span class="nv">$NODE_PORT</span>
+</code></pre></div><p>We should see the response text &ldquo;Hello World&rdquo;.</p>
+<h1 id="rolling-updates">Rolling updates</h1>
+<p>In order to prepare for our rolling update, we need to scale our app by adding
+some replicas
+<code>kubectl scale deployments/myapp --replicas=3</code>.
+To simply put, these 3 replicas are 3 exact copies of our app.
+For demonstrating the new update of the app, we simply modify <em>server.js</em> to
+make the server return a string &ldquo;Hello World v2!&rdquo; to every client's request.
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World v2!&#39;</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div>
+A new Docker image is built by running</p>
+<pre><code>docker build -t myimage:v2 .
+</code></pre><p>After setting the desired image (<em>myimage:v2</em>)
+<code>kubectl set image deployments/myapp myimage=myimage:v2</code>,
+we perform the rolling update with the following command</p>
+<pre><code>kubectl rollout status deployments/myapp
+</code></pre><p>The expected output of <code>curl $(minikube ip):$NODE_PORT</code>
+should be &ldquo;Hello World v2!&rdquo; by now.</p>
+<p>Kubernetes also make it very simple to rollback to the previous version of
+the app</p>
+<pre><code>kubectl rollout undo deployments/myapp
+</code></pre><h1 id="cleaning-up">Cleaning up</h1>
+<p>Finally, we clean up our tutorial by deleting resources (e.g., services, deployments) and stopping minikube.</p>
+<pre><code>kubectl delete service myservice
+kubectl delete deployment myapp
+minikube stop
+</code></pre><p>We should also removing the Docker images if we don't plan to work with them later on.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://kubernetes.io/docs/tutorials/hello-minikube">https://kubernetes.io/docs/tutorials/hello-minikube</a></li>
+<li><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">https://kubernetes.io/docs/tutorials/kubernetes-basics/</a></li>
+</ul>
+
+</div>
+
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-tienduccao-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-137713036-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

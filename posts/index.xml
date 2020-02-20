@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Duc Cao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 May 2019 17:00:02 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tienduccao.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kubernetes rolling updates</title>
+      <link>https://tienduccao.github.io/posts/kubernetes_rolling_updates/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tienduccao.github.io/posts/kubernetes_rolling_updates/</guid>
+      <description>Note: this tutorial is done with Kubernetes v1.17.2, Docker 19.03.5 on MacOS 0.15.2.
+Kubernetes Kubernetes cluster
+ A node is a virtual machine or a physical computer that serves as a worker machine in a Kubernetes cluster. The Master is responsible for managing the cluster. The master coordinates all activities in your cluster, such as scheduling applications, maintaining applications&amp;rsquo; desired state, scaling applications, and rolling out new updates.   Kubernetes core concepts</description>
+    </item>
     
     <item>
       <title>Target encoding</title>
