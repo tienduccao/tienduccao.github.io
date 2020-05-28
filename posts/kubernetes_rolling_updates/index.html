@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.68.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,15 +82,15 @@ a Kubernetes cluster.</li>
 we write a server which listens at the port 8080 and responses
 a string &ldquo;Hello World!&rdquo; to every request from clients.
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// server.js
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
 
 <span class="kd">var</span> <span class="nx">handleRequest</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received request for URL: &#39;</span> <span class="o">+</span> <span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span><span class="p">;</span>
-  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="p">;</span>
-  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">www</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">handleRequest</span><span class="p">)</span><span class="p">;</span>
-<span class="nx">www</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">)</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received request for URL: &#39;</span> <span class="o">+</span> <span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">www</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">handleRequest</span><span class="p">);</span>
+<span class="nx">www</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
 </code></pre></div></p>
 <p>Then we write a Dockerfile for our containerized application</p>
 <pre><code>FROM node:6.14.2
@@ -142,8 +142,8 @@ some replicas
 <code>kubectl scale deployments/myapp --replicas=3</code>.
 To simply put, these 3 replicas are 3 exact copies of our app.
 For demonstrating the new update of the app, we simply modify <em>server.js</em> to
-make the server return a string &ldquo;Hello World v2!&rdquo; to every client's request.
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World v2!&#39;</span><span class="p">)</span><span class="p">;</span>
+make the server return a string &ldquo;Hello World v2!&rdquo; to every client&rsquo;s request.
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World v2!&#39;</span><span class="p">);</span>
 </code></pre></div>
 A new Docker image is built by running</p>
 <pre><code>docker build -t myimage:v2 .
@@ -161,7 +161,7 @@ the app</p>
 <pre><code>kubectl delete service myservice
 kubectl delete deployment myapp
 minikube stop
-</code></pre><p>We should also removing the Docker images if we don't plan to work with them later on.</p>
+</code></pre><p>We should also removing the Docker images if we don&rsquo;t plan to work with them later on.</p>
 <h1 id="references">References</h1>
 <ul>
 <li><a href="https://kubernetes.io/docs/tutorials/hello-minikube">https://kubernetes.io/docs/tutorials/hello-minikube</a></li>

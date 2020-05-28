@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://tienduccao.github.io/</loc>
-    <lastmod>2020-02-20T00:00:00+00:00</lastmod>
+    <loc>https://tienduccao.github.io/posts/the_interpretation_of_financial_statements/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tienduccao.github.io/posts/kubernetes_rolling_updates/</loc>
-    <lastmod>2020-02-20T00:00:00+00:00</lastmod>
+    <loc>https://tienduccao.github.io/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://tienduccao.github.io/posts/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tienduccao.github.io/posts/kubernetes_rolling_updates/</loc>
     <lastmod>2020-02-20T00:00:00+00:00</lastmod>
   </url>
   

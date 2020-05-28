@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.68.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,7 +67,7 @@ and the <strong>mean</strong> <code>y</code> corresponding to each x<!-- raw HTM
 <p>I did an experiment with the Kaggle <a href="https://www.kaggle.com/jameslko/gun-violence-data">Gun Violence</a> dataset to figure
 out the effectiveness of target encoding method.
 The code of this experiment is available at
-<a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb"><a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb">https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb</a></a>.</p>
+<a href="https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb">https://github.com/tienduccao/blog_demo/blob/master/target_encoding/Demo.ipynb</a>.</p>
 <p>The target <code>y</code> in this dataset is <code>n_killed</code> which is the number of people killed from a gun violence indicent.
 The categorical feature <code>x</code> is <code>state</code> where the indicent happened.
 If we apply the
@@ -76,8 +76,8 @@ If we apply the
 The following figure shows the encoded values of <code>x</code> using
 <a href="http://contrib.scikit-learn.org/categorical-encoding/targetencoder.html">TargetEncoder</a>
 <img src="/images/target_encoder.png?raw=true" alt="">
-It is clear that the TargetEncoder's encoded values reflect a trend of the target <code>n_killed</code>.</p>
-<p>To verify if TargetEncoder could help to improve model's predictive power,
+It is clear that the TargetEncoder&rsquo;s encoded values reflect a trend of the target <code>n_killed</code>.</p>
+<p>To verify if TargetEncoder could help to improve model&rsquo;s predictive power,
 I ran a RandomForestClassifier (5-folds stratified k-fold) on a set of categorical features
 (&ldquo;state&rdquo;,
 &ldquo;city_or_county&rdquo;,
